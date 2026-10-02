@@ -81,6 +81,13 @@ a{color:inherit;text-underline-offset:.2em}
 .nav a:not(.btn):hover{color:var(--on-dark)}
 .nav .btn{padding:.6rem 1.15rem;font-size:.92rem}
 
+/* Mobile nav toggle (pure CSS, no JS) */
+.site-header .wrap{position:relative}
+.nav-toggle-input{position:absolute;opacity:0;width:1px;height:1px;overflow:hidden}
+.nav-toggle-btn{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:.5rem;margin:-.5rem -.5rem -.5rem 0}
+.nav-toggle-btn span{width:22px;height:2px;background:var(--on-dark);display:block;border-radius:1px}
+.nav-toggle-input:focus-visible + .nav-toggle-btn{outline:2px solid var(--mint);outline-offset:2px}
+
 /* Hero */
 .hero{position:relative;overflow:hidden;padding-top:clamp(2rem,5vw,3.5rem);padding-bottom:clamp(3rem,7vw,5rem)}
 .hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(2rem,5vw,4rem);align-items:center}
@@ -181,12 +188,20 @@ a{color:inherit;text-underline-offset:.2em}
   .hero-grid,.triggers-grid,.assessment-grid,.split{grid-template-columns:1fr}
   .pillars,.services-grid{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr}
-  .nav a:not(.btn){display:none}
   .path{grid-template-columns:1fr;margin-left:.25rem}
   .path li{padding:0 0 0 2.5rem}
   .path li::before{top:.3rem;bottom:-2rem;left:.9rem;right:auto;width:1px;height:auto}
   .path .num{top:0;left:0}
   .weeks li{grid-template-columns:4.75rem 1fr}
+
+  .nav-toggle-btn{display:flex}
+  .nav{position:absolute;top:100%;left:0;right:0;background:var(--dark2);border:1px solid var(--line-dark);border-top:none;flex-direction:column;align-items:stretch;gap:0;max-height:0;overflow:hidden;transition:max-height .25s ease;z-index:20}
+  .nav a:not(.btn){display:block;padding:.95rem 1.25rem;border-top:1px solid var(--line-dark)}
+  .nav .btn{margin:1rem 1.25rem;text-align:center;justify-content:center}
+  .nav-toggle-input:checked ~ .nav{max-height:420px}
+}
+@media (min-width:901px){
+  .nav-toggle-btn{display:none}
 }
 
 /* Secondary page hero (inner pages) */
@@ -223,6 +238,10 @@ a{color:inherit;text-underline-offset:.2em}
       <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#0F1C17"/><path d="M9 17.5l5 5 9-10" fill="none" stroke="#2EE6A6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
       Vistavine
     </a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
+    <label for="nav-toggle" class="nav-toggle-btn" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </label>
     <nav class="nav" aria-label="Primary">
       <a href="index.html" aria-current="page">Home</a>
       <a href="services.html">Services</a>
